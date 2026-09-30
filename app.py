@@ -1,6 +1,6 @@
-from fastapi import FastAPI,APIRouter
+from fastAPI import FastAPI,APIRouter
 
-app = FastApi()
+app = FastAPI()
 router = APIRouter()
 # Comic Generation Route
 @router.post("/generate", response_class=HTMLResponse)
