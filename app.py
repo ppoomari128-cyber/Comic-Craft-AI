@@ -4,6 +4,7 @@ import json
 import google.generativeai as genai
 
 genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
+    model = genai.GenerativeModel("gemini-3.5-flash")
 
 def generate_outline(full_prompt):
     model = genai.GenerativeModel("gemini-3.5-flash")
