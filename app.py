@@ -30,9 +30,8 @@ Example:
   }}
 ]
 """
-
-    response = model.generate_content(prompt)
-    text = response.text.strip()
+response = model.generate_content(prompt)
+ text = response.text.strip()
 
     if text.startswith("```"):
         text = text.replace("```json", "").replace("```", "").strip()
@@ -50,13 +49,13 @@ OUTLINE:
 Return ONLY the story text.
 Do not use markdown.
 """
-    response = model.generate_content(prompt)
-    return response.text.strip()
+response = model.generate_content(prompt)
+return response.text.strip()
 app = FastAPI()
 @app.get("/")
 async def home():
-    return{"message":"Comic-Craft AI is live"}
-router = APIRouter()
+  return{"message":"Comic-Craft AI is live"}
+router = APIRouter(
 # Comic Generation Route
 @router.post("/generate")
 async def generate_comic(
