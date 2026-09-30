@@ -7,15 +7,14 @@ genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
 model = genai.GenerativeModel("gemini-3.5-flash")
 
 def generate_outline(full_prompt):
-model = genai.GenerativeModel("gemini-3.5-flash")
 
    prompt = f"""
-Create a 5-panel comic story outline.
+   Create a 5-panel comic story outline.
 
-User story:
-{full_prompt}
+   User story:
+   {full_prompt}
 
-Return ONLY valid JSON.
+   Return ONLY valid JSON.
 The JSON must be a list containing exactly 5 objects.
 Each object must have these keys:
 "title"
