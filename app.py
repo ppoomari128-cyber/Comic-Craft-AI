@@ -1,5 +1,8 @@
 from fastapi import FastAPI,APIRouter,Request,Form,HTTPException
 app = FastAPI()
+@app.get("/")
+async def home():
+    return{"message":"Comic-Craft AI is live"}
 router = APIRouter()
 # Comic Generation Route
 @router.post("/generate")
