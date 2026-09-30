@@ -38,6 +38,20 @@ Example:
         text = text.replace("```json", "").replace("```", "").strip()
 
     return json.loads(text)
+    def generate_story(outline):
+    prompt = f"""
+You are a comic story writer.
+
+Create a complete story from the following 5-panel comic outline.
+
+OUTLINE:
+{json.dumps(outline, indent=2)}
+
+Return ONLY the story text.
+Do not use markdown.
+"""
+    response = model.generate_content(prompt)
+    return response.text.strip()
 app = FastAPI()
 @app.get("/")
 async def home():
