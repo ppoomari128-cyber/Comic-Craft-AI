@@ -1,4 +1,43 @@
 from fastapi import FastAPI,APIRouter,Request,Form,HTTPException
+import os
+import json
+import google.generativeai as genai
+
+genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
+
+def generate_outline(full_prompt):
+    model = genai.GenerativeModel("gemini-1.5-flash")
+
+    prompt = f"""
+Create a 5-panel comic story outline.
+
+User story:
+{full_prompt}
+
+Return ONLY valid JSON.
+The JSON must be a list containing exactly 5 objects.
+Each object must have these keys:
+"title"
+"story"
+"image_prompt"
+
+Example:
+[
+  {{
+    "title": "Panel 1",
+    "story": "Story text",
+    "image_prompt": "Detailed comic image description"
+  }}
+]
+"""
+
+    response = model.generate_content(prompt)
+    text = response.text.strip()
+
+    if text.startswith("```"):
+        text = text.replace("```json", "").replace("```", "").strip()
+
+    return json.loads(text)
 app = FastAPI()
 @app.get("/")
 async def home():
