@@ -1,9 +1,8 @@
 from fastapi import FastAPI,APIRouter,Request,Form,HTTPException
-from starlette.responses import HTMLResponce
 app = FastAPI()
 router = APIRouter()
 # Comic Generation Route
-@router.post("/generate", response_class=HTMLResponse)
+@router.post("/generate")
 async def generate_comic(
     request: Request,
     prompt: str = Form(...),
@@ -53,7 +52,7 @@ async def generate_comic(
 
 
 # Export Success Route
-@router.get("/export-success", response_class=HTMLResponse)
+@router.get("/export-success")
 async def export_success(request: Request, pdf_path: str):
     return templates.TemplateResponse("export_success.html", {
         "request": request,
