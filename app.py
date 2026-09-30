@@ -38,7 +38,7 @@ Example:
         text = text.replace("```json", "").replace("```", "").strip()
 
     return json.loads(text)
-    def generate_story(outline):
+def generate_story(outline):
     prompt = f"""
 You are a comic story writer.
 
