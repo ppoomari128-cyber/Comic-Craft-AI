@@ -1,3 +1,7 @@
+from fastapi import FastAPI,APIRouter
+
+app = FastApi()
+router = APIRouter()
 # Comic Generation Route
 @router.post("/generate", response_class=HTMLResponse)
 async def generate_comic(
@@ -64,4 +68,9 @@ async def test_image(prompt: str = "A futuristic city at sunset, sci-fi, cinemat
         image_path = generate_image(prompt)
         return {"message": "Image generated successfully", "path": image_path}
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+        raise HTTPException(
+            status_code=500,
+            detail=str(e)
+        )
+
+app.include_router(router)
